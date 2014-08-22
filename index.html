@@ -206,7 +206,7 @@
 
   <script type="text/javascript">
     // "Shuffle" the deck.
-    var num_shuffles = 100;
+    var num_shuffles = 100, c = 0;
     for (var i = 0; i < num_shuffles; i++) {
       var slot1 = Math.floor((Math.random() * squares.length));
       var slot2 = Math.floor((Math.random() * squares.length));
@@ -224,7 +224,8 @@
         if (i == 2 && j == 2) {
           sq.html(CENTER_SQUARE);
         } else {
-          sq.html(squares[i*NUM_SQUARES_PER_SIDE + j]);
+          sq.html(squares[c]);
+          c++;
         }
         // Set up click events.
         $(sqId).click(function(event) {
