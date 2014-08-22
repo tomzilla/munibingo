@@ -42,6 +42,13 @@
   }
 
   td {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
     border: 1px solid #AAAAAA;
     padding: 10px;
     text-align: center;
@@ -50,9 +57,10 @@
     height: 120px;
   }
 
-  a.selected {
-    font-weight: bold;
+  td.selected {
+    background-color:#ffffcc;
   }
+
 
   #square2-2 {
     font-weight: bold;
@@ -66,7 +74,6 @@
 
   a {
     text-decoration: none;
-    cursor: pointer;
   }
 
   .footer a {
@@ -93,7 +100,7 @@
     "Clipper reader doesn't work",
     "Driver doesn't unlock the backdoor",
     "Someone playing music from their phone",
-    "Someone yelling at themselves/someone else",
+    "Someone yelling at themselves / someone else",
     "Tourists trying to get on the wrong bus",
     "The bus' electric pole falls off",
     "Wheelchair on the bus",
@@ -228,9 +235,8 @@
           c++;
         }
         // Set up click events.
-        $(sqId).click(function(event) {
-          var targetId = event.currentTarget.id;
-          $('#' + targetId).toggleClass('selected');
+        $(sqId).parent().click(function(event) {
+          $(this).toggleClass('selected');
         });
       }
     }
