@@ -1,0 +1,238 @@
+<html>
+<head>
+<title>MUNI Bingo</title>
+<style type="text/css">
+  html {
+    background-color: #EEEEEE;
+    width: 100%;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #262626;
+    font-family: Georgia, serif;
+  }
+
+  h1 {
+    font-size: 84px;
+    font-family: 'helvetica nueue', 'arial', sans-serif;
+    margin: 20px 0 0 0;
+    color: #191919;
+    letter-spacing: 5px;
+  }
+
+  h4 {
+    font-size: 20px;
+    font-family: 'helvetica nueue', 'arial', sans-serif;
+    font-weight: normal;
+    letter-spacing: 1.1px;
+    margin: 0 0 20px 0; 
+    color: #AAAAAA; 
+  }
+
+  table {
+    width: 700px;
+    height: 600px;
+    margin: auto;
+    background-color: #FFFFFF;
+    padding: 0px;
+    font-size: 16px;
+  }
+
+  td {
+    border: 1px solid #AAAAAA;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+    width: 120px;
+    height: 120px;
+  }
+
+  a.selected {
+    font-weight: bold;
+  }
+
+  #square2-2 {
+    font-weight: bold;
+  }
+
+  .footer {
+    margin: 30px 0 30px 0;
+    font-family: 'helvetica nueue', 'arial', sans-serif;
+    color: #AAAAAA;
+  }
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .footer a {
+    color: #009999;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
+  }
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+  var NUM_SQUARES_PER_SIDE = 5;
+  var CENTER_SQUARE = 
+    "FREE RIDE";
+  var squares = [
+    "Someone trying to skip the fare",
+    "The buses on the line are all going in one direction",
+    "A dog without a leash",
+    "Live arrival time is down",
+    "Someone who doesn't know how to open the backdoor",
+    "Hobo funk",
+    "Clipper reader doesn't work",
+    "Driver doesn't unlock the backdoor",
+    "Someone playing music from their phone",
+    "Someone yelling at themselves/someone else",
+    "Tourists trying to get on the wrong bus",
+    "The bus' electric pole falls off",
+    "Wheelchair on the bus",
+    "Someone missing their stop",
+    "Someone running after the bus and making it",
+    "Someone running after the bus and missing it",
+    "Bus driver yelling at someone",
+    "Bus driver stops the bus to chat with another driver",
+    "Bus is full",
+    "Someone asking for change at the bus stop",
+    "Someone talking loudly on the phone",
+    "Can't request a stop",
+    "Someone doesn't have exact change",
+    "Someone getting thrown out"
+  ];
+</script>
+</head>
+<body>
+  <h1>#MUNIBINGO</h1>
+  <h4>A cynical ray of sunshine in your bleak, miserable travel experience</h4>
+  <table cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <a id="square0-0"></a>
+      </td>
+      <td>
+        <a id="square0-1"></a>
+      </td>
+      <td>
+        <a id="square0-2"></a>
+      </td>
+      <td>
+        <a id="square0-3"></a>
+      </td>
+      <td>
+        <a id="square0-4"></a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a id="square1-0"></a>
+      </td>
+      <td>
+        <a id="square1-1"></a>
+      </td>
+      <td>
+        <a id="square1-2"></a>
+      </td>
+      <td>
+        <a id="square1-3"></a>
+      </td>
+      <td>
+        <a id="square1-4"></a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a id="square2-0"></a>
+      </td>
+      <td>
+        <a id="square2-1"></a>
+      </td>
+      <td>
+        <a id="square2-2"></a>
+      </td>
+      <td>
+        <a id="square2-3"></a>
+      </td>
+      <td>
+        <a id="square2-4"></a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a id="square3-0"></a>
+      </td>
+      <td>
+        <a id="square3-1"></a>
+      </td>
+      <td>
+        <a id="square3-2"></a>
+      </td>
+      <td>
+        <a id="square3-3"></a>
+      </td>
+      <td>
+        <a id="square3-4"></a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a id="square4-0"></a>
+      </td>
+      <td>
+        <a id="square4-1"></a>
+      </td>
+      <td>
+        <a id="square4-2"></a>
+      </td>
+      <td>
+        <a id="square4-3"></a>
+      </td>
+      <td>
+        <a id="square4-4"></a>
+      </td>
+    </tr>
+  </table>
+  <div class="footer">
+  </div>
+
+  <script type="text/javascript">
+    // "Shuffle" the deck.
+    var num_shuffles = 100;
+    for (var i = 0; i < num_shuffles; i++) {
+      var slot1 = Math.floor((Math.random() * squares.length));
+      var slot2 = Math.floor((Math.random() * squares.length));
+      var temp = squares[slot1];
+      squares[slot1] = squares[slot2];
+      squares[slot2] = temp;
+    }
+
+    // Add first 25 to screen.
+    for (var i = 0; i < NUM_SQUARES_PER_SIDE; i++) {
+      for (var j = 0; j < NUM_SQUARES_PER_SIDE; j++) {
+        // Set up visuals.
+        var sqId = '#square' + i + '-' + j;
+        var sq = $(sqId);
+        if (i == 2 && j == 2) {
+          sq.html(CENTER_SQUARE);
+        } else {
+          sq.html(squares[i*NUM_SQUARES_PER_SIDE + j]);
+        }
+        // Set up click events.
+        $(sqId).click(function(event) {
+          var targetId = event.currentTarget.id;
+          $('#' + targetId).toggleClass('selected');
+        });
+      }
+    }
+  </script>
+</body>
+</html>
